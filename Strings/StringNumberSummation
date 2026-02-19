@@ -1,0 +1,87 @@
+Description:
+Write a program to print sum of all numbers present in the given String.
+
+
+Constraints:
+Input : First line consists of one String value. 
+
+Output : Print the sum after adding the number in given String
+
+Constraints : If the given String doesn't contain any number. Then print "No Numbers Found".
+
+ 
+
+
+Example:
+Input 1 : Hi12hello11bye10bye
+
+Output 1 : 12 + 11 + 10 = 33
+
+Input 2 : this10is20my-5pen15ok
+
+Output 2 : 10 + 20  - 5 + 15 = 40
+
+
+Explanation:
+Input 1 : Hi12hello11bye10bye
+
+Output 1 : 12 + 11 + 10 = 33
+
+Explanation : Here 12,11,10 are the numbers present in given String. So after adding 12+11+10 = 33
+
+Input 2 : this10is20my-5pen15ok
+
+Output 2 : 10 + 20 + -5 + 15 = 40
+
+Explanation : Here 10,20,5,15 are the numbers present in given String and here ' -5 ' is considered as negative number. So after adding 
+
+10+20-5+15 = 40
+
+import java.util.*;
+class M{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        String dum="";
+        ArrayList<String> al = new ArrayList<>();
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(ch=='-'|| Character.isDigit(ch)){
+                dum+=ch;
+            }
+            else if(!dum.isEmpty()){
+                al.add(dum);
+                dum="";
+            }
+            else{
+                dum="";
+            }
+        }
+        if(!dum.isEmpty()) al.add(dum);
+        //System.out.println(al);
+        if(al.size()==0){
+            System.out.println("No Numbers Found");
+            return;
+        }
+        String ans="";
+        for(String x:al){
+            if(Integer.parseInt(x)>=0){
+                ans+="+"+x;
+            }
+            else{
+                ans+=x;
+            }
+        }
+        ans=ans.substring(1,ans.length());
+        System.out.print(ans+"=");
+        ArrayList<Integer> al2 = new ArrayList<>();
+        for(String x: al){
+            al2.add(Integer.parseInt(x));
+        }
+        int sum=0;
+        for(int i:al2){
+            sum+=(i);
+        }
+        System.out.println(sum);
+    }
+}
